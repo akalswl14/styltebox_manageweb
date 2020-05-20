@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>제목</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="/stylesheets/embedfeed.css">
+    <script>
+        function check_all_feed(CheckSection, AllCheck) {
+            var chk = CheckSection.getElementsByTagName('input');
+            for (i = 0; i < chk.length; i++)
+                chk[i].checked = AllCheck.checked;
+        }
+        function is_checked(elements_name) {
+            var checked = false;
+            var chk = document.getElementsByClassName(elements_name);
+            for (var i = 0; i < chk.length; i++) {
+                if (chk[i].checked) {
+                    checked = true;
+                }
+            }
+            return checked;
+        }
+        function fboardlist_submit(f) {
+            console.log("FUNCTION!");
+            if (!is_checked("chkbox")) {
+                alert(document.pressed + " 하실 항목을 하나 이상 선택하세요.");
+                return false;
+            }
+            return true;
+        }
+        function uncheck(){
+            var chkboxList = document.getElementsByClassName('chkbox');
+            for(i=0;i<chkboxList.length;i++){
+                chkboxList[i].checked = false;
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <h1>오늘의 피드</h1>
+    <form name="fboardlist" id="fboardlist" onsubmit="return fboardlist_submit(this);" method="post">
+        <div class="btn_fixed_top">
+            <input type="button" name="act_button" value="Unchecked" onclick="uncheck()"
+                class="btn_02 btn">
+            <input type="submit" name="act_button" value="Download" onclick="document.pressed=this.value"
+                class="btn_02 btn">
+        </div>
+        <%- feeddata %>
+    </form>
+</body>
+
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>제목</title>
+    <meta charset="utf-8" />
+    <script>
+        function check_all(f) {
+            var chk = document.getElementsByName("chkbox");
+            for (i = 0; i < chk.length; i++)
+                chk[i].checked = f.chkall.checked;
+        }
+        function is_checked(elements_name) {
+            var checked = false;
+            var chk = document.getElementsByName(elements_name);
+            for (var i = 0; i < chk.length; i++) {
+                if (chk[i].checked) {
+                    checked = true;
+                }
+            }
+            return checked;
+        }
+        function fboardlist_submit(f) {
+            if (!is_checked("chkbox")) {
+                alert(document.pressed + " 하실 항목을 하나 이상 선택하세요.");
+                return false;
+            }
+            return true;
+        }
+    </script>
+</head>
+
+<body>
+    <h1>오늘의 피드</h1>
+    <form name="fboardlist" id="fboardlist" onsubmit="return fboardlist_submit(this);" method="post">
+        <div class="tbl_head01 tbl_wrap">
+            <table>
+                <caption>새로운 게시물 관리</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">
+                            <input type="checkbox" name="chkall" value="1" id="chkall" onclick="check_all(this.form)">
+                        </th>
+                        <th scope="col">브랜드명</th>
+                        <th scope="col">새 게시물 수</th>
+                        <th scope="col">다운로드수</th>
+                        <th scope="col">reviewstatus</th>
+                        <th scope="col">comments</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <%- todaydata %>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="btn_fixed_top">
+            <input type="submit" name="act_button" value="modify reviewstatus" onclick="document.pressed=this.value"
+                class="btn_02 btn">
+            <input type="text" name="input_comments">
+            <input type="submit" name="act_button" value="modify comments" onclick="document.pressed=this.value"
+                class="btn_02 btn">
+            <input type="submit" name="act_button" value="view details" onclick="document.pressed=this.value"
+                class="btn_02 btn">
+        </div>
+    </form>
+</body>
+
+</html>
