@@ -12,7 +12,7 @@ var StyleExcel = {
             const sheetname = workbook.SheetNames[i];
             json_data[sheetname] = XLSX.utils.sheet_to_json(workbook.Sheets[sheetname]);
         }
-        fs.writeFileSync('routes/StyleExcel/parse_style.json', JSON.stringify(json_data), 'utf-8');
+        fs.writeFileSync('public/json/parse_style.json', JSON.stringify(json_data), 'utf-8');
         EditJson.edit_brandexcel(req,res);
     }
 };

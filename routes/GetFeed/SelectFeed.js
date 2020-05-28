@@ -1,15 +1,15 @@
 var fs = require('fs')
 
 function date_ascending(a, b) {
-    var dateA = new Date(a['날짜']).getTime();
-    var dateB = new Date(b['날짜']).getTime();
-    return dateA > dateB ? 1 : -1;
+    var dateA = new Date(a).getTime();
+    var dateB = new Date(b).getTime();
+    return dateA < dateB ? 1 : -1;
 };
 
 var selectfeed = {
     getembed: function (req, res) {
         QueryBrandList = req.query.brand;
-        const DataBuffer = fs.readFileSync('routes/GetFeed/CrawlingFeed.json');
+        const DataBuffer = fs.readFileSync('public/json/CrawlingFeed.json');
         var JsonData = JSON.parse(DataBuffer.toString());
         KeyList = Object.keys(JsonData);
         var data = { feeddata: '' };
@@ -35,9 +35,15 @@ var selectfeed = {
                 var ContentsNum = JsonData[feedid].ContentsNum;
                 var date = JsonData[feedid].Date;
                 var idx = DateList.indexOf(date);
+                var embedurl = ''
+                if (feedid[feedid.length - 1] == '/') {
+                    embedurl = feedid + 'embed'
+                } else {
+                    embedurl = feedid + '/embed'
+                }
                 tmp = '<div class="EachEmbed">'
                     + '<iframe src="https://www.instagram.com/p/'
-                    + feedid + 'embed" frameborder="0" scrolling="no"allowtransparency="true"></iframe>'
+                    + embedurl + '" frameborder="0" scrolling="no"allowtransparency="true"></iframe>'
                     + '<div class="SelectArea"><div class="DownloadNum">다운로드 : '
                     + DownloadNum + '</div>'
                     + '<div class="SelectImage">'

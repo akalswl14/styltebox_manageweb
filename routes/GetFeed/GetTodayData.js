@@ -3,7 +3,7 @@ var fs = require('fs')
 var GetData = {
     renderdata: function (req, res) {
         // 브랜드 정보 있는 brand.json 파싱
-        var par = JSON.parse(fs.readFileSync('./routes/GetFeed/brand.json', 'utf8'));
+        var par = JSON.parse(fs.readFileSync('public/json/brand.json', 'utf8'));
         var data = { todaydata: '' };
         var jsondata = "";
         // 브랜드 정보를 dataArray에 array로 추가

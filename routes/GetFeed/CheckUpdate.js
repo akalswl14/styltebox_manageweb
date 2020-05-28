@@ -18,7 +18,7 @@ TodayDate = year +'-'+ month +'-'+ day;
 
 var checkupdate = {
     checkdate: function (req, res) {
-        var par = JSON.parse(fs.readFileSync('./routes/GetFeed/LastUpdateDate.json', 'utf8'));
+        var par = JSON.parse(fs.readFileSync('public/json/LastUpdateDate.json', 'utf8'));
         console.log(TodayDate)
         console.log(par['lastupdatedate'])
         if (par['lastupdatedate'] == TodayDate) {

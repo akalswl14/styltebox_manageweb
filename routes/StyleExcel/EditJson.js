@@ -3,9 +3,9 @@ var crawling = require('../GetFeed/crawling');
 
 var EditJson = {
     edit_brandexcel: function (req, res) {
-        var DataBuffer = fs.readFileSync('routes/StyleExcel/parse_style.json');
+        var DataBuffer = fs.readFileSync('public/json/parse_style.json');
         var ExcelJsonData = JSON.parse(DataBuffer.toString());
-        DataBuffer = fs.readFileSync('routes/StyleExcel/style.json');
+        DataBuffer = fs.readFileSync('public/json/style.json');
         var JsonData = JSON.parse(DataBuffer.toString());
 
         SheetNameList = Object.keys(ExcelJsonData)

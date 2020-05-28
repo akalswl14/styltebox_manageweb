@@ -18,7 +18,7 @@ TodayDate = year + '-' + month + '-' + day;
 var UpdateData = {
     update_date: function (req, res) {
         var json_data = { 'lastupdatedate': TodayDate }
-        fs.writeFileSync('./routes/GetFeed/LastUpdateDate.json', JSON.stringify(json_data), 'utf-8');
+        fs.writeFileSync('public/json/LastUpdateDate.json', JSON.stringify(json_data), 'utf-8');
         GetTodayData.renderdata(req, res);
     },
     update_date_toYesterday:function(req,res){
@@ -32,12 +32,12 @@ var UpdateData = {
         if(d < 10)    { d = "0" + d; }
         var YesterdayDate = y + "-" + m + "-" + d;
         var json_data = { 'lastupdatedate': YesterdayDate }
-        fs.writeFileSync('./routes/GetFeed/LastUpdateDate.json', JSON.stringify(json_data), 'utf-8');
+        fs.writeFileSync('public/json/LastUpdateDate.json', JSON.stringify(json_data), 'utf-8');
         res.redirect('/getfeed');
     },
     update_reviewstatus: function (req, res) {
         BrandList = req.body.chkbox;
-        const DataBuffer = fs.readFileSync('routes/GetFeed/brand.json');
+        const DataBuffer = fs.readFileSync('public/json/brand.json');
         var JsonData = JSON.parse(DataBuffer.toString());
         if (typeof (BrandList) === 'string') {
             CurrentStatus = JsonData[BrandList].ReviewStatus;
@@ -56,14 +56,14 @@ var UpdateData = {
                 }
             }
         }
-        fs.writeFileSync('routes/GetFeed/brand.json', JSON.stringify(JsonData), 'utf-8');
+        fs.writeFileSync('public/json/brand.json', JSON.stringify(JsonData), 'utf-8');
         GetTodayData.renderdata(req, res);
     },
     update_comments: function (req, res) {
         // console.log(req.body);
         input_comments = req.body.input_comments;
         BrandList = req.body.chkbox;
-        const DataBuffer = fs.readFileSync('routes/GetFeed/brand.json');
+        const DataBuffer = fs.readFileSync('public/json/brand.json');
         var JsonData = JSON.parse(DataBuffer.toString());
         if (typeof (BrandList) === 'string') {
             JsonData[BrandList].Comment = input_comments;
@@ -72,7 +72,7 @@ var UpdateData = {
                 JsonData[BrandList[i]].Comment = input_comments;
             }
         }
-        fs.writeFileSync('routes/GetFeed/brand.json', JSON.stringify(JsonData), 'utf-8');
+        fs.writeFileSync('public/json/brand.json', JSON.stringify(JsonData), 'utf-8');
         GetTodayData.renderdata(req, res);
     }
 };

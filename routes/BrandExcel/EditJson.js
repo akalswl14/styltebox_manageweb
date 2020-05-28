@@ -1,11 +1,10 @@
 var fs = require('fs');
-var UpdateData = require('../GetFeed/UpdateData')
 
 var EditJson = {
     edit_brandexcel: function (req, res) {
-        var DataBuffer = fs.readFileSync('routes/BrandExcel/parse_brand.json');
+        var DataBuffer = fs.readFileSync('public/json/parse_brand.json');
         var ExcelJsonData = JSON.parse(DataBuffer.toString());
-        DataBuffer = fs.readFileSync('routes/GetFeed/brand.json');
+        DataBuffer = fs.readFileSync('public/json/brand.json');
         var JsonData = JSON.parse(DataBuffer.toString());
 
         SheetData = ExcelJsonData["StyleBOX Brand"]
@@ -71,7 +70,7 @@ var EditJson = {
             if(JsonData.hasOwnProperty(BrandName)&&JsonData[BrandName].hasOwnProperty('Comment')){
                 tmp["Comment"] = JsonData[BrandName]['Comment']
             }else{
-                tmp["Comment"] = 0;
+                tmp["Comment"] = "";
             }
 
             console.log(tmp)
@@ -89,8 +88,8 @@ var EditJson = {
             // JsonData[BrandName]['Comment'] = ''
         }
 
-        fs.writeFileSync('routes/GetFeed/brand.json', JSON.stringify(JsonData), 'utf-8');
-        UpdateData.update_date_toYesterday(req,res);
+        fs.writeFileSync('public/json/brand.json', JSON.stringify(JsonData), 'utf-8');
+        res.redirect('/');
     }
 }
 module.exports = EditJson;
